@@ -8,12 +8,13 @@ RUN apt-get install -y libldb-dev libldap2-dev git zip curl sudo unzip libcurl4-
 	libzip-dev postgresql-server-dev-all libxml2 libxml2-dev libonig-dev nano \
 	&& apt-get clean
 
-RUN docker-php-source extract
+#RUN docker-php-source extract
 
-RUN pdo_mysql
+RUN docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_pgsql
 
-# RUN docker-php-ext-install ldap curl pdo pdo_pgsql gd zip bz2 \
-# 	intl bcmath opcache calendar pdo_mysql
+ RUN docker-php-ext-install ldap curl pdo pdo_pgsql gd zip bz2 \
+ 	intl bcmath opcache calendar pdo_mysql
 
 RUN a2enmod rewrite headers
 ENV LOG_CHANNEL=stderr
